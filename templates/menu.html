@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Меню | Кафе Марта{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h2 class="page-title">Наше меню</h2>
+    <p class="page-description">
+        Оберіть категорію та перегляньте доступні позиції.
+    </p>
+</section>
+
+<section class="section">
+    <h3 class="section-title">Швидкий перехід</h3>
+
+    <div class="quick-nav">
+        {% for category, subcategories in grouped_menu.items() %}
+            {% set category_index = loop.index %}
+
+            {% if subcategories|length > 1 or ('Без підкатегорії' not in subcategories) %}
+                <details class="dropdown-nav">
+                    <summary>{{ category }}</summary>
+                    <div class="dropdown-links">
+                        <a href="#category-{{ category_index }}">Уся категорія</a>
+                        {% for subcategory, products in subcategories.items() %}
+                            <a href="#subcategory-{{ category_index }}-{{ loop.index }}">{{ subcategory }}</a>
+                        {% endfor %}
+                    </div>
+                </details>
+            {% else %}
+                <a class="single-nav-link" href="#category-{{ category_index }}">{{ category }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+
+{% for category, subcategories in grouped_menu.items() %}
+    {% set category_index = loop.index %}
+
+    <section id="category-{{ category_index }}" class="section">
+        <h2 class="page-title">{{ category }}</h2>
+    </section>
+
+    {% for subcategory, products in subcategories.items() %}
+    <section id="subcategory-{{ category_index }}-{{ loop.index }}" class="section">
+        {% if subcategory != "Без підкатегорії" %}
+            <h3 class="section-title">{{ subcategory }}</h3>
+        {% endif %}
+
+        <div class="menu-list">
+            {% for product in products %}
+            <div class="menu-item">
+    {% if product.image_filename %}
+    <div class="menu-image-box">
+        <img src="/uploads/{{ product.image_filename }}" alt="{{ product.name }}" class="menu-image">
+    </div>
+    {% endif %}
+
+    <div class="menu-content">
+        <div>
+            <h4>{{ product.name }}</h4>
+            <p>
+                {% if product.weight %}{{ product.weight }}{% endif %}
+                {% if product.description %}
+                    {% if product.weight %} • {% endif %}
+                    {{ product.description }}
+                {% endif %}
+            </p>
+        </div>
+        <span>{{ product.price }} ₴</span>
+    </div>
+</div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Адмінка | Кафе Марта{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h2 class="page-title">Адмін-панель</h2>
+    <p class="page-description">
+        Тут адміністратор може додавати нові страви до меню.
+    </p>
+    <a href="/logout" class="logout-link">Вийти з адмінки</a>
+</section>
+
+<section class="section">
+    <div class="admin-form-box">
+        <form action="/admin" method="get" class="admin-search-form">
+            <input type="text" name="search" placeholder="Пошук страви..." value="{{ search }}">
+            <button type="submit">Знайти</button>
+        </form>
+    </div>
+</section>
+
+<section class="section">
+    <div class="admin-form-box">
+        <form action="/admin/add-product" method="post" enctype="multipart/form-data" class="admin-form">
+            <label>Назва страви</label>
+            <input type="text" name="name" required>
+
+            <label>Опис</label>
+            <textarea name="description"></textarea>
+
+            <label>Вага</label>
+            <input type="text" name="weight">
+
+            <label>Ціна</label>
+            <input type="number" step="0.01" name="price" required>
+
+            <label>Категорія</label>
+<select name="category" id="category" required onchange="updateSubcategories()">
+    <option value="">Оберіть категорію</option>
+    <option value="Основне меню">Основне меню</option>
+    <option value="Десерти">Десерти</option>
+    <option value="Піца">Піца</option>
+    <option value="Алкогольні напої">Алкогольні напої</option>
+    <option value="Безалкогольні напої">Безалкогольні напої</option>
+    <option value="Коктейлі">Коктейлі</option>
+</select>
+
+<label>Підкатегорія</label>
+<select name="subcategory" id="subcategory">
+    <option value="">Оберіть підкатегорію</option>
+</select>
+
+<label>Фото страви</label>
+<input type="file" name="image" accept="image/*">
+            <button type="submit">Додати страву</button>
+        </form>
+    </div>
+</section>
+<section class="section">
+    <h3 class="section-title">Список страв</h3>
+
+    <div class="admin-products">
+
+        {% for product in products %}
+        <div class="admin-product">
+
+            <div class="admin-product-info">
+                <h4>{{ product.name }}</h4>
+                <p>{{ product.category }} → {{ product.subcategory }}</p>
+                <p>{{ product.weight }} • {{ product.price }} ₴</p>
+            </div>
+
+            <div class="admin-product-actions">
+                <a class="edit-link" href="/admin/edit/{{ product.id }}">Редагувати</a>
+                <a class="delete-link"
+                    href="/admin/delete/{{ product.id }}"
+                    onclick="return confirm('Точно видалити цю страву?')">
+                    Видалити
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+<script>
+    function updateSubcategories() {
+        const category = document.getElementById("category").value;
+        const subcategory = document.getElementById("subcategory");
+
+        const options = {
+            "Основне меню": [
+                "Холодні закуски",
+                "Салати",
+                "Перші страви",
+                "Гарячі страви",
+                "Страви на мангалі",
+                "Овочі гриль"
+            ],
+            "Алкогольні напої": [
+                "Алкогольні напої",
+                "Слабоалкогольні напої",
+                "До пива"
+            ],
+            "Безалкогольні напої": [
+                "Гарячі напої",
+                "Холодні напої"
+            ],
+            "Коктейлі": [
+                "Коктейлі алкогольні",
+                "Коктейлі безалкогольні"
+            ],
+            "Піца": [
+                "Без підкатегорії"
+            ],
+            "Десерти": [
+                "Без підкатегорії"
+            ]
+        };
+
+        subcategory.innerHTML = '<option value="">Оберіть підкатегорію</option>';
+
+        if (options[category]) {
+            options[category].forEach(function(item) {
+                const option = document.createElement("option");
+                option.value = item;
+                option.textContent = item;
+                subcategory.appendChild(option);
+            });
+        }
+    }
+</script>
+{% endblock %}
+

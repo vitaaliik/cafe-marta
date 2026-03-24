@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Головна | Кафе Марта{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-overlay">
+        <p class="hero-subtitle">СУЧАСНЕ КАФЕ У ТРУСКАВЦІ</p>
+
+        <h1 class="hero-title">
+            Смачні страви, коктейлі та<br>
+            затишна атмосфера
+        </h1>
+
+        <p class="hero-text">
+            Ласкаво просимо до кафе “Марта”. Переглядайте меню, знайомтесь
+            з закладом та знайдете всю необхідну інформацію онлайн.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/menu" class="btn-primary">Переглянути меню</a>
+            <a href="/contacts" class="btn-secondary">Контакти</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 class="page-title">Ласкаво просимо</h2>
+    <p class="page-description">
+        Затишне кафе у Трускавці з смачною кухнею, атмосферою відпочинку та великим вибором страв і напоїв.
+    </p>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h3>🍕 Велике меню</h3>
+        <p>Піца, деруни, мангал, десерти та напої</p>
+    </div>
+
+    <div class="feature">
+        <h3>🍷 Напої</h3>
+        <p>Коктейлі, алкогольні та безалкогольні напої</p>
+    </div>
+
+    <div class="feature">
+        <h3>🌿 Атмосфера</h3>
+        <p>Затишне місце для відпочинку з друзями</p>
+    </div>
+</section>
+
+{% endblock %}

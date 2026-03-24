@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Контакти | Кафе Марта{% endblock %}
+
+{% block content %}
+<section class="section">
+    <p class="tag">Контактна інформація</p>
+    <h2 class="page-title">Контакти кафе “Марта”</h2>
+    <p class="page-description">
+        Тут відвідувачі можуть знайти адресу, графік роботи та способи зв’язку із закладом.
+    </p>
+</section>
+
+<section class="section">
+    <div class="contact-grid">
+        <div class="contact-card">
+            <h3>Адреса</h3>
+            <p>м. Трускавець, вул. Стебницька, 17</p>
+        </div>
+
+        <div class="contact-card">
+            <h3>Телефон</h3>
+            <p>068 357 11 60</p>
+            <p>067 674 84 98</p>
+        </div>
+
+        <div class="contact-card">
+            <h3>Графік роботи</h3>
+            <p>Щодня: 10:00 – 22:00</p>
+        </div>
+
+    
+    </div>
+</section>
+
+<section class="section">
+    <h3 class="section-title">Ми на карті</h3>
+
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2602.863270603398!2d23.5110463!3d49.278988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473a4852bd3bfb0d%3A0xd40bb516ebfe5023!2z0JzQsNGA0YLQsA!5e0!3m2!1suk!2sua!4v1774358959593!5m2!1suk!2sua" 
+        width="100%" 
+        height="400" 
+        style="border:0;" 
+        allowfullscreen="" loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+    <a href="https://maps.app.goo.gl/HHQRF14CTNKQY8ML8"
+       target="_blank"
+       class="btn-primary"
+       style="margin-top: 15px; display: inline-block;">
+       Відкрити в Google Maps
+    </a>
+</section>
+
+{% endblock %}

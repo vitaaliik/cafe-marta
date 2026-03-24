@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Вхід в адмінку | Кафе Марта{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h2 class="page-title">Вхід в адмін-панель</h2>
+    <p class="page-description">
+        Увійдіть, щоб керувати меню закладу.
+    </p>
+</section>
+
+<section class="section">
+    <div class="admin-form-box">
+        <form action="/login" method="post" class="admin-form">
+            <label>Логін</label>
+            <input type="text" name="username" required>
+
+            <label>Пароль</label>
+            <input type="password" name="password" required>
+
+            <button type="submit">Увійти</button>
+
+            {% if error %}
+                <p class="login-error">{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+</section>
+{% endblock %}
