@@ -2,7 +2,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-DATA_DIR = os.getenv("DATA_DIR", "data")
+DATA_DIR = "/app/data"
 os.makedirs(DATA_DIR, exist_ok=True)
 
 DATABASE_PATH = os.path.join(DATA_DIR, "cafe_marta.db")

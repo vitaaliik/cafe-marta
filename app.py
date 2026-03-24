@@ -18,7 +18,7 @@ app.add_middleware(SessionMiddleware, secret_key="marta_super_secret_key")
 Base.metadata.create_all(bind=engine)
 seed_if_empty()
 
-DATA_DIR = os.getenv("DATA_DIR", "data")
+DATA_DIR = "/app/data"
 UPLOAD_DIR = os.path.join(DATA_DIR, "uploads")
 
 os.makedirs(DATA_DIR, exist_ok=True)
