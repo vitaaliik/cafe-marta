@@ -10,18 +10,22 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from database import Base, engine, SessionLocal
 from models import Product
-
+from seed_data import seed_if_empty
 app = FastAPI()
 
 app.add_middleware(SessionMiddleware, secret_key="marta_super_secret_key")
 
 Base.metadata.create_all(bind=engine)
+seed_if_empty()
 
-UPLOAD_DIR = "uploads"
+DATA_DIR = os.getenv("DATA_DIR", "data")
+UPLOAD_DIR = os.path.join(DATA_DIR, "uploads")
+
+os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 templates = Jinja2Templates(directory="templates")
 

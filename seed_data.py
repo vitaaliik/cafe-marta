@@ -314,6 +314,13 @@ def seed_products():
 
     print(f"Успішно додано {len(products)} страв у базу.")
 
+def seed_if_empty():
+    db = SessionLocal()
+    has_products = db.query(Product).first()
+    db.close()
 
+    if not has_products:
+        seed_products()
+        
 if __name__ == "__main__":
     seed_products()
